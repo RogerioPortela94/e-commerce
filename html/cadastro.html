@@ -16,36 +16,36 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active p-3" id="dadosPessoais" role="tabpanel" aria-labelledby="dadosPessoais-tab">
         <h5 class="card-title text-center">Dados Pessoais</h5>
-        <form>
+        <form class="needs-validation" novalidate id="frm_dadosPessoais">
             <div class="form-group">
               <label for="nome">Nome</label>
-              <input type="text" class="form-control" id="nome" placeholder="Nome Completo">
+              <input type="text" class="form-control" id="nome" placeholder="Nome Completo" required >
             </div>
             <div class="row form-group" >
                 <div class="col">
                     <label for="cpf">CPF</label>
-                    <input type="number" class="form-control" id="cpf" placeholder="Somente Números">
+                    <input type="number" class="form-control" id="cpf" placeholder="Somente Números" required>
                 </div>
                 <div class="col">
                     <label for="rg">RG</label>
-                    <input type="number" class="form-control" id="rg" placeholder="Somente Números">
+                    <input type="number" class="form-control" id="rg" placeholder="Somente Números" required>
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col">
                     <label for="nascimento">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="nascimento">
+                    <input type="date" class="form-control" id="nascimento" required>
                 </div>
                 <div class="col">
                     <label for="telefone">Telefone</label>
-                    <input type="number" class="form-control" id="telefone" placeholder="Somente Números">
+                    <input type="number" class="form-control" id="telefone" placeholder="Somente Números" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Email">
+                <input type="email" class="form-control" id="email" placeholder="Email" required>
             </div>
-            <button class="btn btn-primary float-right m-1" id="btnEndereco" style="margin-bottom: 10px;">Proximo</button>
+            <button type="button" class="btn btn-primary float-right m-1" onclick="endereco()">Proximo</button>
           </form>             
       </div>
       <div class="tab-pane fade p-3" id="endereco" role="tabpanel" aria-labelledby="endereco-tab">
@@ -53,38 +53,38 @@
         <form>
             <div class="form-group">
                 <label for="cep">CEP</label>
-                <input type="number" class="form-control" id="cep" placeholder="Somente Números">
+                <input type="number" class="form-control" id="cep" placeholder="Somente Números" required>
             </div>
             <div class="row form-group" >
                 <div class="col col-md-7">
                     <label for="logradouro">Logradouro</label>
-                    <input type="text" class="form-control" id="logradouro" placeholder="Logradouro">
+                    <input type="text" class="form-control" id="logradouro" placeholder="Logradouro" required>
                 </div>
                 <div class="col col-md-1">
                     <label for="numero">Nº</label>
-                    <input type="text" class="form-control" id="numero" placeholder="nº">
+                    <input type="text" class="form-control" id="numero" placeholder="nº" required>
                 </div>
                 <div class="col">
                     <label for="complemento">Complemento</label>
-                    <input type="text" class="form-control" id="complemento" placeholder="Somente Números">
+                    <input type="text" class="form-control" id="complemento" placeholder="Complemento">
                 </div>
             </div>
             <div class="row form-group">
                 <div class="col">
                     <label for="bairro">Bairro</label>
-                    <input type="text" class="form-control" id="bairro" placeholder="Bairro">
+                    <input type="text" class="form-control" id="bairro" placeholder="Bairro" required>
                 </div>
                 <div class="col">
                     <label for="cidade">Cidade</label>
-                    <input type="number" class="form-control" id="cidade" placeholder="Cidade">
+                    <input type="number" class="form-control" id="cidade" placeholder="Cidade" required>
                 </div>
                 <div class="col col-md-1">
                     <label for="estado">UF</label>
-                    <input type="text" class="form-control" id="estado" placeholder="UF">
+                    <input type="text" class="form-control" id="estado" placeholder="UF" required>
                 </div>
             </div>
-            <button class="btn btn-primary float-right m-1"  id="btnLogin">Próximo</button>
-            <button class="btn btn-secondary float-right m-1" id="btnDadosPessoais" style="margin-bottom: 10px; margin-right: 10px;">Anterior</button>
+            <button type="button" class="btn btn-primary float-right m-1"  onclick="login()">Próximo</button>
+            <button type="button" class="btn btn-secondary float-right m-1" onclick="dadosPessoais()">Anterior</button>
         </form>                  
       </div>
       <div class="tab-pane fade p-3" id="login" role="tabpanel" aria-labelledby="login-tab">
@@ -93,19 +93,20 @@
             <div class="row form-group" >
                 <div class="col">
                     <label for="senha">Senha</label>
-                    <input type="password" class="form-control" id="senha" placeholder="Senha">
+                    <input type="password" class="form-control" id="senha" placeholder="Senha" required>
                 </div>
                 <div class="col">
                     <label for="rg">Confirme sua Senha</label>
-                    <input type="password" class="form-control" id="rg" placeholder="Confirme">
+                    <input type="password" class="form-control" id="rg" placeholder="Confirme" required>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary float-right m-1">Salvar</button>
-            <button class="btn btn-secondary float-right m-1" id="btnEndereco"  style="margin-bottom: 10px; margin-right: 10px;">Anterior</button>
-          </form>      
+            <button type="button" class="btn btn-primary float-right m-1" onclick="cadastrar()">Salvar</button>
+            <button type="button" class="btn btn-secondary float-right m-1" onclick="endereco()">Anterior</button>  
+        </form>
+            
       </div>
 
     </div>
 </div>
 
-<script src="js/lib.js"></script>
+<script src="js/cadastro.js"></script>
