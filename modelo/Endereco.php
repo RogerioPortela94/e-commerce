@@ -1,41 +1,100 @@
 <?php
-    class Usuario
+    class Endereco
     {
-        private $id;
-        private $nome;
-        private $email;
-        private $senha;
+        private $codigo;
+        private $cliente_codigo;
+        private $cep;
+        private $logradouro;
+        private $numero;
+        private $complemento;
+        private $bairro;
+        private $cidade;
+        private $estado;
 
         function __construct()
         {
             
         }
 
-        public function setId($id)
+        public function setCodigo($codigo)
         {
-            $this->id = $id;
+            $this->codigo = $codigo;
         }
-        public function getId()
+        public function getCodigo()
         {
-            return $this->id;
-        }
-
-        public function setEmail($email)
-        {
-            $this->email= $email;
-        }
-        public function getEmail()
-        {
-            return $this->email;
+            return $this->codigo;
         }
 
-        public function setNome($nome)
+        public function setClienteCodigo($cliente_codigo)
         {
-            $this->nome = $nome;
+            $this->id = $cliente_codigo;
         }
-        public function getNome()
+        public function getClienteCodigo()
         {
-            return $this->nome;
+            return $this->cliente_codigo;
+        }
+
+        public function setCep($cep)
+        {
+            $this->cep= $cep;
+        }
+        public function getCep()
+        {
+            return $this->cep;
+        }
+
+        public function setLogradouro($logradouro)
+        {
+            $this->logradouro = $logradouro;
+        }
+        public function getLogradouro()
+        {
+            return $this->logradouro;
+        }
+
+        public function setNumero($numero)
+        {
+            $this->numero= $numero;
+        }
+        public function getNumero()
+        {
+            return $this->numero;
+        }
+
+        public function setComplemento($complemento)
+        {
+            $this->complemento= $complemento;
+        }
+        public function getComplemento()
+        {
+            return $this->complemento;
+        }
+
+        public function setBairro($bairro)
+        {
+            $this->bairro= $bairro;
+        }
+        public function getBairro()
+        {
+            return $this->bairro;
+        }
+
+        public function setCidade($cidade)
+        {
+            $this->cidade= $cidade;
+        }
+        public function getCidade()
+        {
+            return $this->cidade;
+        }
+
+        public function setEstado($estado)
+        {
+            $this->estado= $estado;
+        }
+        public function getEstado()
+        {
+            return $this->estado;
         }
 
         public function setSenha($senha)

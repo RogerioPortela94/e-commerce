@@ -1,32 +1,26 @@
 <?php
     class Cliente
     {
-        private $id;
+        private $codigo;
         private $nome;
+        private $cpf;
+        private $rg;
+        private $nascimento;
+        private $telefone;
         private $email;
-        private $senha;
 
         function __construct()
         {
             
         }
 
-        public function setId($id)
+        public function setCodigo($codigo)
         {
-            $this->id = $id;
+            $this->codigo = $codigo;
         }
-        public function getId()
+        public function getCodigo()
         {
-            return $this->id;
-        }
-
-        public function setEmail($email)
-        {
-            $this->email= $email;
-        }
-        public function getEmail()
-        {
-            return $this->email;
+            return $this->codigo;
         }
 
         public function setNome($nome)
@@ -38,14 +32,49 @@
             return $this->nome;
         }
 
-        public function setSenha($senha)
+        public function setCpf($cpf)
         {
-            $this->senha = $senha;
+            $this->cpf = $cpf;
         }
-        public function getSenha()
+        public function getCpf()
         {
-            return $this->senha;
+            return $this->cpf;
         }
         
+        public function setRg($rg)
+        {
+            $this->rg= $rg;
+        }
+        public function getRg()
+        {
+            return $this->rg;
+        }
+
+        public function setNascimento($nascimento)
+        {
+            $this->nascimento= $nascimento;
+        }
+        public function getNascimento()
+        {
+            return $this->nascimento;
+        }
+
+        public function setTelefone($telefone)
+        {
+            $this->telefone= $telefone;
+        }
+        public function getTelefone()
+        {
+            return $this->telefone;
+        }
+
+        public function setEmail($email)
+        {
+            $this->email= $email;
+        }
+        public function getEmail()
+        {
+            return $this->email;
+        }
     }
 ?>

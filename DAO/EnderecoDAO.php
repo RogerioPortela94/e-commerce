@@ -2,7 +2,7 @@
 
     require_once  (dirname(__FILE__)."/../DBConexao.php");
 
-    class UsuarioDAO
+    class EnderecoDAO
     {
         private static $cnx;
 
@@ -11,12 +11,26 @@
             self::$cnx = DBConexao::getInstancia();
         }
 
-        public function inserir(Usuario $usuario)
+        public function inserir(Endereco $endereco)
         {
-            $query = self::$cnx->prepare("INSERT INTO usuario(nome, email, senha) VALUES(?,?,md5(?))");
-            $query->bindValue(1,$usuario->getNome());
-            $query->bindValue(2,$usuario->getEmail());
-            $query->bindValue(3,$usuario->getSenha());
+            $query = self::$cnx->prepare("INSERT INTO endereco(
+                                                                cliente_codigo,
+                                                                endereco_cep,
+                                                                endereco_logradouro, 
+                                                                endereco_numero,
+                                                                endereco_complemento,
+                                                                endereco_bairro,
+                                                                endereco_cidade,
+                                                                endereco_estado) 
+                                                        VALUES(?,?,?,?,?,?,?,?)");
+            $query->bindValue(1,$endereco->getClienteCodigo());
+            $query->bindValue(2,$endereco->getCep());
+            $query->bindValue(3,$endereco->getLogradouro());
+            $query->bindValue(4,$endereco->getNumero());
+            $query->bindValue(5,$endereco->getComplemento());
+            $query->bindValue(6,$endereco->getBairro());
+            $query->bindValue(7,$endereco->getCidade());
+            $query->bindValue(8,$endereco->getEstado());
             return $query->execute();
         }
 

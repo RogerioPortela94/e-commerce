@@ -7,7 +7,7 @@ function endereco(){
     $("#login").attr("class","tab-pane fade p-3");
 }
 function dadosPessoais(){
-    $("#dadosPessoais-tab").attr("class","nav-link actived");
+    $("#dadosPessoais-tab").attr("class","nav-link active");
     $("#dadosPessoais").attr("class","tab-pane fade show active p-3");
     $("#endereco-tab").attr("class","nav-link disabled");
     $("#endereco").attr("class","tab-pane fade  p-3");

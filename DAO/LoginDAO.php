@@ -2,7 +2,7 @@
 
     require_once  (dirname(__FILE__)."/../DBConexao.php");
 
-    class UsuarioDAO
+    class LoginDAO
     {
         private static $cnx;
 
@@ -11,25 +11,14 @@
             self::$cnx = DBConexao::getInstancia();
         }
 
-        public function inserir(Usuario $usuario)
+        public function inserir(Login $login)
         {
-            $query = self::$cnx->prepare("INSERT INTO usuario(nome, email, senha) VALUES(?,?,md5(?))");
-            $query->bindValue(1,$usuario->getNome());
-            $query->bindValue(2,$usuario->getEmail());
-            $query->bindValue(3,$usuario->getSenha());
+            //$query = self::$cnx->prepare("INSERT INTO usuario(nome, email, senha) VALUES(?,?,md5(?))");
+            $query = self::$cnx->prepare("INSERT INTO login(cliente_codigo, login_senha) VALUES(?,?)");
+            $query->bindValue(1,$login->getClienteCodigo());
+            $query->bindValue(2,$login->getSenha());
             return $query->execute();
         }
 
-
-
-
-        public function buscar($email)
-        {
-            $query = self::$cnx->prepare("SELECT id, nome, email, senha FROM usuario WHERE email = ?");
-            $query->bindValue(1,$email);
-            $query->execute();
-
-            return $query->fetch();
-        }
     }
 ?>

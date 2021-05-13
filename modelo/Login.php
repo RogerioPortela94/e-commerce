@@ -1,9 +1,7 @@
 <?php
-    class Usuario
+    class Login
     {
-        private $id;
-        private $nome;
-        private $email;
+        private $cliente_codigo;
         private $senha;
 
         function __construct()
@@ -11,31 +9,13 @@
             
         }
 
-        public function setId($id)
+        public function setClienteCodigo($cliente_codigo)
         {
-            $this->id = $id;
+            $this->id = $cliente_codigo;
         }
-        public function getId()
+        public function getClienteCodigo()
         {
-            return $this->id;
-        }
-
-        public function setEmail($email)
-        {
-            $this->email= $email;
-        }
-        public function getEmail()
-        {
-            return $this->email;
-        }
-
-        public function setNome($nome)
-        {
-            $this->nome = $nome;
-        }
-        public function getNome()
-        {
-            return $this->nome;
+            return $this->cliente_codigo;
         }
 
         public function setSenha($senha)
