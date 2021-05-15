@@ -23,5 +23,52 @@ function login(){
         $("#login").attr("class","tab-pane fade show active p-3");
 }
 function cadastrar(){
-    alert("sem conexão com o Banco de dados");
+    frm_dados = $("#frm_dados").serialize();
+    frm_endereco = $("#frm_endereco").serialize();
+    frm_login = $("#frm_login").serialize();
+    formulario = frm_dados + "&" + frm_endereco + "&" + frm_login;
+
+    $.ajax({
+        url: 'cadastro/inserir.php',
+        type: 'post',
+        data: formulario,
+        datatype: 'html',
+        cache: false,
+        beforeSend: function() {}
+    }).done(function(msg) {
+        if (msg == "ok") {
+            cadastroStatus(msg);
+        } else {
+            cadastroStatus(msg);
+        }
+    }).fail(function(jqXHR, textStatus, msg) {
+        cadastroStatus(msg);
+    });
+    
 }
+
+function cadastroStatus(msg){
+    if (msg == "ok") {
+        $('#sucessoModal').modal('show');
+        $('#sucessoModal').on('hidden.bs.modal', function (e) {
+            $("main").load("html/principal.html");
+            $('#loginModal').modal('show');
+        });
+    } else {
+        $('#erroMsg').append(msg);
+        $('#erroModal').modal('show');
+    }
+}
+
+var senha = document.getElementById("senha"), confirmar_senha = document.getElementById("confirmar_senha");
+
+function validarSenha(){
+  if(senha.value != confirmar_senha.value) {
+    confirmar_senha.setCustomValidity("Senhas diferentes!");
+  } else {
+    confirmar_senha.setCustomValidity('');
+  }
+}
+
+senha.onchange = validarSenha;
+confirmar_senha.onkeyup = validarSenha;

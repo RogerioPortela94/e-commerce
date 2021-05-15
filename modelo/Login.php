@@ -11,7 +11,7 @@
 
         public function setClienteCodigo($cliente_codigo)
         {
-            $this->id = $cliente_codigo;
+            $this->cliente_codigo = $cliente_codigo;
         }
         public function getClienteCodigo()
         {

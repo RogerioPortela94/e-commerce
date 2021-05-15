@@ -17,6 +17,5 @@ function carregar(){
     //Fecha modal
     $(".modal").modal("toggle");
 
-    // Faz o carregamento da página de acordo com o COD da página, que vai pegar os valores da página.
     $("main").load("html/cadastro.html");
 }
