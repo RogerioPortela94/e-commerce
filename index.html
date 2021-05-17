@@ -40,8 +40,7 @@
                         <a class="nav-link dropdown-toggle text-black-50" href="#" id="usuarioDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="img/user.svg" width="30" height="30"  alt="Usuário">
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="usuarioDropdown">
-                            <a class="dropdown-item" data-toggle="modal" data-target="#loginModal" href="#">Login</a>
+                        <div class="dropdown-menu" aria-labelledby="usuarioDropdown" id="itensUsuario">
                         </div>
                     </li>
                     <li class="nav-item">
@@ -104,18 +103,18 @@
               </button>
                 </div>
                 <div class="modal-body text-center">
-                    <form id="frm_login" class="">
+                    <form onsubmit="login(); return false;" id="frm_login">
                         <div class="form-group">
-                            <label for="inputEmail" class="sr-only">Usuário</label>
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Usuário" required autofocus>
+                            <label for="inputUsuario" class="sr-only">Usuário</label>
+                            <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Email ou CPF" required autofocus value="">
                         </div>
                         <div class="form-group">
                             <label for="inputPassword" class="sr-only">Senha</label>
-                            <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required>
+                            <input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required value="">
                         </div>
                         <div class="form-group">
                             <button type="button" class="btn btn-secondary w-25" data-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary w-25" onclick="login()">Entrar</button>
+                            <button type="submit" class="btn btn-primary w-25">Entrar</button>
                         </div>
                     </form>
                 </div>

@@ -37,10 +37,10 @@
 
         public function login($user)
         {
-            $query = self::$cnx->prepare("SELECT cliente_codigo FROM cliente WHERE cliente_email = ? OR cliente_cpf = ? OR cliente_rg = ?");
+            $query = self::$cnx->prepare("SELECT cliente_codigo, cliente_nome FROM cliente WHERE cliente_email = ? OR cliente_cpf = ?");
             $query->bindValue(1,$user);
             $query->bindValue(2,$user);
-            $query->bindValue(3,$user);
+
             $query->execute();
 
             return $query->fetch();

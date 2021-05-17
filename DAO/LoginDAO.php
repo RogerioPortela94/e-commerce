@@ -20,5 +20,16 @@
             return $query->execute();
         }
 
+        public function login(Login $login) 
+        {
+            $query = self::$cnx->prepare("SELECT cliente_codigo FROM login WHERE cliente_codigo = ? AND login_senha = ?");
+            $query->bindValue(1,$login->getClienteCodigo());
+            $query->bindValue(2,$login->getSenha());
+            
+            $query->execute();
+
+            return $query->fetch();
+        }
+
     }
 ?>
