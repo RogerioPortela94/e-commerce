@@ -5,10 +5,22 @@ $(document).ready(function(){
 
 });
 
+function pesquisa(){
+    var pesquisa = getUrlVars()["pesquisar"];
+    var categoria = getUrlVars()["categoria"];
+    if(pesquisa != null && pesquisa !== undefined){
+        var data = {pesquisar : pesquisa};
+    }else if(categoria != null && categoria !== undefined){
+        var data = {categoria : categoria};;
+    }else{
+        var data = {pesquisar : " "};
+    }
+   
 
-function listar(){
     $.ajax({
-        url: 'produto/listar.php',
+        url: 'produto/pesquisar.php',
+        type: 'GET',
+        data: data,
         datatype: 'json',
         cache: false,
         beforeSend: function() {
@@ -56,6 +68,13 @@ function listar(){
     });
 }
 
+function listar(){
+    pesquisa();
+}
+
+function categoria(){
+    alert("teste");
+}
 
 function carrinho(produtoCodigo){
     var data =  {produto_codigo : produtoCodigo};
@@ -78,4 +97,18 @@ function carrinho(produtoCodigo){
     }).fail(function(jqXHR, textStatus, msg) {
         cadastroStatus(msg);
     });
+}
+
+//Pega os valores da url criando um array
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
 }

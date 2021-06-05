@@ -10,6 +10,7 @@ $(document).ready(function(){
         $("main").load($(this).attr("href"));
     });
 
+    
     //verificar sessão ao iniciar
     session();
 

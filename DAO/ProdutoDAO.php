@@ -62,5 +62,28 @@
 
             return $query->fetchAll();
         }
+
+        public function pesquisar($pesquisa){
+            $query = self::$cnx->prepare("SELECT    produto_codigo, 
+                                                    produto_nome, 
+                                                    produto_valor, 
+                                                    categoria.categoria_codigo as categoria_codigo,
+                                                    produto_autor
+                                                FROM produto 
+                                                INNER JOIN categoria 
+                                                    on produto.categoria_codigo = categoria.categoria_codigo
+                                                WHERE produto_nome LIKE ? OR 
+                                                    produto_editora LIKE ? OR 
+                                                    produto_autor LIKE ? OR 
+                                                    categoria_descricao LIKE ?
+                                                ORDER BY produto_codigo");
+            $query->bindValue(1,$pesquisa);
+            $query->bindValue(2,$pesquisa);
+            $query->bindValue(3,$pesquisa);
+            $query->bindValue(4,$pesquisa);
+            $query->execute();
+
+            return $query->fetchAll();
+        }
     }
 ?>
