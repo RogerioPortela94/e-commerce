@@ -1,6 +1,6 @@
 $(document).ready(function(){
     
-    $("main").load("html/principal.html");
+    iniciar();
     
     // Executa o evento CLICK em todos os links do menu
     $("#carregar").click(function(e){
@@ -14,6 +14,10 @@ $(document).ready(function(){
     session();
 
 });
+
+function iniciar(){
+    $("main").load("html/principal.html");
+}
 
 function session(){
     //verificar sessão
@@ -44,6 +48,7 @@ function session(){
             $("#itensUsuario").append("<a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#sairModal\" href=\"\" onclick=\"sair()\" id=\"sairUsuario\">Sair</a>");
 
         } else {
+            
             //limpar dropdown do usuario
             $("#nomeUsuario").remove();
             $("#divideUsuario1").remove();
@@ -97,6 +102,7 @@ function sair(){
     }).done(function(msg) {
         if (msg == "ok") {
             alert("Até Logo! \n\n Volte Sempre!");
+            document.location.reload(true);
             session();
         } else {
             alert(msg);
