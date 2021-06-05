@@ -1,50 +1,50 @@
 <?php
-    class Usuario
+    class Pedido
     {
-        private $id;
-        private $nome;
-        private $email;
-        private $senha;
+        private $pedido_codigo;
+        private $cliente_codigo;
+        private $pedido_data;
+        private $pedido_valor_final;
 
         function __construct()
         {
             
         }
 
-        public function setId($id)
+        public function setPedidoCodigo($pedido_codigo)
         {
-            $this->id = $id;
+            $this->pedido_codigo = $pedido_codigo;
         }
-        public function getId()
+        public function getPedidoCodigo()
         {
-            return $this->id;
-        }
-
-        public function setEmail($email)
-        {
-            $this->email= $email;
-        }
-        public function getEmail()
-        {
-            return $this->email;
+            return $this->pedido_codigo;
         }
 
-        public function setNome($nome)
+        public function setClienteCodigo($cliente_codigo)
         {
-            $this->nome = $nome;
+            $this->cliente_codigo= $cliente_codigo;
         }
-        public function getNome()
+        public function getClienteCodigo()
         {
-            return $this->nome;
+            return $this->cliente_codigo;
         }
 
-        public function setSenha($senha)
+        public function setPedidoData($pedido_data)
         {
-            $this->senha = $senha;
+            $this->pedido_data = $pedido_data;
         }
-        public function getSenha()
+        public function getPedidoData()
         {
-            return $this->senha;
+            return $this->pedido_data;
+        }
+
+        public function setPedidoValorFinal($pedido_valor_final)
+        {
+            $this->pedido_valor_final = $pedido_valor_final;
+        }
+        public function getPedidoValorFinal()
+        {
+            return $this->pedido_valor_final;
         }
         
     }

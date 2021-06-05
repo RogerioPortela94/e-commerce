@@ -2,7 +2,7 @@
 
     require_once  (dirname(__FILE__)."/../DBConexao.php");
 
-    class ProdutoDAO
+    class AutorDAO
     {
         private static $cnx;
 
@@ -25,8 +25,7 @@
             $query = self::$cnx->prepare("SELECT produto_codigo, 
                                                  produto_nome, 
                                                  categoria_codigo,
-                                                 produto_valor,
-                                                 produto_autor 
+                                                 produto_valor 
                                           FROM produto");
             $query->execute();
 
