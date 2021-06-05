@@ -34,6 +34,13 @@
 
             return $query->fetchAll();
         }
+        public function itens($cliente_codigo)
+        {
+            $query = self::$cnx->prepare("select COUNT(produto_codigo) AS itens from carrinho WHERE cliente_codigo = ?");
+            $query->bindValue(1,$cliente_codigo);
+            $query->execute();
 
+            return $query->fetch();
+        }
     }
 ?>

@@ -5,19 +5,22 @@ $(document).ready(function(){
     // Executa o evento CLICK em todos os links do menu
     $("#carregar").click(function(e){
         e.preventDefault();
-        
+        alert(numeroItensCarrinho());
         // Faz o carregamento da página de acordo com o COD da página, que vai pegar os valores da página.
         $("main").load($(this).attr("href"));
     });
 
     
     //verificar sessão ao iniciar
-    session();
+    
+
+    
 
 });
 
 function iniciar(){
-    $("main").load("html/principal.html");
+    session();
+    $("main").load("html/principal.html");   
 }
 
 function session(){
@@ -126,4 +129,24 @@ function limpar(){
       });
 }
 
+function numeroItensCarrinho(){
+    var retorno = "";
+
+    $.ajax({
+        url: 'carrinho/itensCart.php',
+        datatype: 'html',
+        cache: false,
+        beforeSend: function() {}
+    }).done(function(msg) {
+        if (msg == "erro") {
+            retorno += msg;
+        } else {
+           retorno += msg;
+        }
+    }).fail(function(jqXHR, textStatus, msg) {
+        retorno += msg;
+    });
+
+    return retorno;
+}
 

@@ -72,9 +72,6 @@ function listar(){
     pesquisa();
 }
 
-function categoria(){
-    alert("teste");
-}
 
 function carrinho(produtoCodigo){
     var data =  {produto_codigo : produtoCodigo};
