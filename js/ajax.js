@@ -83,6 +83,7 @@ function login(){
             alert("login efetuado com sucesso");
             limpar();
             session();
+            listarCarrinho();
             $(".modal").modal("toggle");
         } else {
             alert(msg);
