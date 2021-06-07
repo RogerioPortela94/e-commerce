@@ -35,7 +35,8 @@
 
         public function produto($codigo){
             $query = self::$cnx->prepare("SELECT produto_codigo, 
-                                                 produto_nome, 
+                                                 produto_nome,
+                                                 produto_autor, 
                                                  produto_descricao,
                                                  produto_dimensao,
                                                  produto_editora,
@@ -43,8 +44,11 @@
                                                  produto_lancamento,
                                                  produto_qntd,
                                                  produto_valor,
-                                                 categoria_codigo
-                                          FROM produto WHERE produto_codigo = ?");
+                                                 categoria.categoria_descricao AS categoria_descricao
+                                          FROM produto 
+                                          INNER JOIN categoria 
+                                                    on produto.categoria_codigo = categoria.categoria_codigo
+                                          WHERE produto_codigo = ?");
             $query->bindValue(1,$codigo);
             $query->execute();
 

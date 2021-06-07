@@ -197,7 +197,7 @@ function cadastroStatus(msg){
     if (msg == "ok") {
         $('#sucessoModal').modal('show');
         $('#sucessoModal').on('hidden.bs.modal', function (e) {
-            $("main").load("html/principal.html");
+            iniciar();
             $('#loginModal').modal('show');
         });
     } else {
@@ -306,6 +306,72 @@ function deletarItemCarrinho(produtoCodigo){
     }
 }
 
+function detalheProduto(produto){
+    $("main").load("html/detalhe.html");
+
+    var data = {produto : produto};
+
+    $.ajax({
+        url: 'produto/detalhe.php',
+        type: 'POST',
+        data: data,
+        datatype: 'json',
+        cache: false,
+        beforeSend: function() {
+
+        }
+    }).done(function(msg){
+        var data = JSON.parse(msg);
+        if(data != "erro"){
+            $("#detalheProduto").append(
+                    "<div  class=\"row\" id=\"item\">"+
+                        "<div class=\"col col-sm-3 text-center\">"+
+                            "<img class=\"img-fluid\" style=\"max-height: 400px; max-width: 230px;\" src=\"img/produtos/produto"+data['produto_codigo']+"/produto"+data['produto_codigo']+"Capa.jpg\" alt=\"Imagem de capa do card\">"+
+                        "</div>"+
+                        "<div class=\"col\">"+
+                            "<div class=\"row\">"+
+                                "<div class=\"col\">"+
+                                    "<h2 class=\"card-title\">"+data['produto_nome']+"</h2>"+
+                                "</div>"+
+                                "<div class=\"col text-right\">"+
+                                    "<h4 class=\"card-text\" style=\"margin-right: 10px; margin-top: 10px;\"> R$  "+data['produto_valor']+"</h4>"+
+                                "</div>"+
+                            "</div>"+
+                            "<div class=\"row\">"+
+                                "<div class=\"col\">"+
+                                    "<h4 class=\"card-title\">"+data['produto_autor']+"</h4>"+
+                                "</div>"+
+                                "<div class=\"col text-right\">"+
+                                    "<button class=\"btn btn-success\" style=\"margin-right: 10px;\">Adicionar ao Carrinho</button>"+
+                                "</div>"+
+                                
+                            "</div>"+
+                            "<div class=\"row\" style=\"padding: 15px;\">"+
+                                "<p class=\"card-text\" >"+data['produto_descricao']+"</p>"+
+                            "</div>"+
+                                
+                        "</div>"+
+                    "</div>"+
+                    "<hr>"+
+                    "<div class=\"container-fluid\">"+
+                        
+                        "<h5 class=\"card-text row\">Editora: "+data['produto_editora']+"</h5>"+
+                        "<h5 class=\"card-text row\">Número de Páginas: "+data['produto_paginas']+"</h5>"+
+                        "<h5 class=\"card-text row\">Dimensões: "+data['produto_dimensao']+"</h5>"+
+                        "<h5 class=\"card-text row\">Data de Lançamento:  "+data['produto_lancamento']+"</h5>"+
+                        "<h5 class=\"card-text row\">Categoria:  "+data['categoria_descricao']+"</h5>"+
+                    "</div>"
+            );
+        }else{
+            $("#detalheProduto").append("ERRO");
+        }
+
+
+    }).fail(function(jqXHR, textStatus, msg) {
+        alert(msg);
+    });
+}
+
 function listarProdutos(){
     var pesquisa = getUrlVars()["pesquisar"];
     var categoria = getUrlVars()["categoria"];
@@ -335,9 +401,13 @@ function listarProdutos(){
                 $("#listarProdutos").append(
                         "<div style=\"padding: 2%\" class=\"col-sm-3\">"+
                             "<div class=\"card\">"+
-                                "<div class=\"text-center\">"+ 
-                                    //link para capa de acordo com o produto
-                                    "<img class=\"card-img-top img-fluid\" style=\"max-height: 300px; max-width: 250px;\" src=\"img/produtos/produto"+data[c]['produto_codigo']+"/produto"+data[c]['produto_codigo']+"Capa.jpg\" alt=\"Imagem de capa do card\">"+
+                                "<div class=\"text-center\">"+
+                                    "<a href=\"\" onclick=\"detalheProduto("+data[c]['produto_codigo']+"); return false;\">"+
+                                        //"<a href=\"?produto="+data[c]['produto_codigo']+"\">"+
+                                            //link para capa de acordo com o produto
+                                            "<img class=\"card-img-top img-fluid\" style=\"max-height: 300px; max-width: 250px;\" src=\"img/produtos/produto"+data[c]['produto_codigo']+"/produto"+data[c]['produto_codigo']+"Capa.jpg\" alt=\"Imagem de capa do card\">"+
+                                        //"</a>"+
+                                    "</a>"+
                                 "</div>"+
                                 "<div class=\"card-body text-center\">"+
                                     //nome e autor
