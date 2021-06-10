@@ -3,7 +3,7 @@
     {
         private $produto_codigo;
         private $cliente_codigo;
-
+        private $qntd;
 
         function __construct()
         {
@@ -26,6 +26,15 @@
         public function getClienteCodigo()
         {
             return $this->cliente_codigo;
+        }
+
+        public function setQntd($qntd)
+        {
+            $this->qntd = $qntd;
+        }
+        public function getQntd()
+        {
+            return $this->qntd;
         }
         
     }

@@ -41,8 +41,8 @@ function session(){
             //separador
             $("#itensUsuario").append("<div class=\"dropdown-divider\" id=\"divideUsuario1\"></div>");
             //ações do usuário
-            $("#itensUsuario").append("<a class=\"dropdown-item\" href=\"#\" id=\"pedidosUsuario\">Meus Pedidos</a> ");
-            $("#itensUsuario").append("<a class=\"dropdown-item\" href=\"#\" id=\"configUsuario\">Configurações</a>");
+            $("#itensUsuario").append("<a class=\"dropdown-item\" href=\"\" onclick=\"meusPedidos(); return false;\" id=\"pedidosUsuario\">Meus Pedidos</a> ");
+            $("#itensUsuario").append("<a class=\"dropdown-item\" href=\"\" onclick=\"editarCadastro(); return false;\" id=\"configUsuario\">Editar Informações</a>");
             //separador
             $("#itensUsuario").append("<div class=\"dropdown-divider\" id=\"divideUsuario2\"></div>");
             //sair
@@ -219,11 +219,12 @@ function listarCarrinho(){
         if(data != "erro"){
             var total = 0;
             var c = 0;
+            var html;
             $("#listarCarrinho").remove();
             $("#itensCarrinhoLista").append("<div class=\"card-body\" id=\"listarCarrinho\">");
             for(c; c<data.length; c++){
                 total += parseFloat(data[c]['produto_valor']);
-                $("#listarCarrinho").append(
+                html +=
                     "<div  class=\"row\" id=\"item"+data[c]['produto_codigo']+"\">"+
                         "<div class=\"col col-sm-2\">"+
                             "<img class=\"img-fluid\" style=\"max-height: 200px; max-width: 100px;\" src=\"img/produtos/produto"+data[c]['produto_codigo']+"/produto"+data[c]['produto_codigo']+"Capa.jpg\" alt=\"Imagem de capa do card\">"+
@@ -235,12 +236,62 @@ function listarCarrinho(){
                                 "<div class=\"input-group-prepend\">"+
                                     "<label class=\"input-group-text\" for=\"inputGroupSelect01\">Qntd: </label>"+
                                 "</div>"+
-                                "<select class=\"custom-select\" id=\"inputGroupSelect01\">"+
-                                    "<option value=\"1\" selected>1</option>"+
-                                    "<option value=\"2\">2</option>"+
-                                    "<option value=\"3\">3</option>"+
-                                    "<option value=\"4\">4</option>"+
-                                    "<option value=\"5\">5</option>"+
+                                "<select class=\"custom-select\" onchange=\"quantidadeProduto(this,"+data[c]['produto_codigo']+")\" id=\"inputGroupSelect01\">";
+                switch (data[c]['qntd']){
+                    case 1:
+                        html +=
+                            "<option value=\"1\" selected>1</option>"+
+                            "<option value=\"2\">2</option>"+
+                            "<option value=\"3\">3</option>"+
+                            "<option value=\"4\">4</option>"+
+                            "<option value=\"5\">5</option>";
+                        break;
+                    case 2:
+                        html +=
+                            "<option value=\"1\">1</option>"+
+                            "<option value=\"2\" selected>2</option>"+
+                            "<option value=\"3\">3</option>"+
+                            "<option value=\"4\">4</option>"+
+                            "<option value=\"5\">5</option>"
+                        ;
+                        break;
+                    case 3:
+                        html +=
+                            "<option value=\"1\">1</option>"+
+                            "<option value=\"2\">2</option>"+
+                            "<option value=\"3\" selected>3</option>"+
+                            "<option value=\"4\">4</option>"+
+                            "<option value=\"5\">5</option>"
+                        ;
+                        break;
+                    case 4:
+                        html +=
+                            "<option value=\"1\">1</option>"+
+                            "<option value=\"2\">2</option>"+
+                            "<option value=\"3\">3</option>"+
+                            "<option value=\"4\" selected>4</option>"+
+                            "<option value=\"5\">5</option>"
+                        ;
+                        break;
+                    case 5:
+                        html +=
+                            "<option value=\"1\">1</option>"+
+                            "<option value=\"2\">2</option>"+
+                            "<option value=\"3\">3</option>"+
+                            "<option value=\"4\">4</option>"+
+                            "<option value=\"5\" selected>5</option>"
+                        ;
+                        break;
+                    default:
+                        html +=
+                            "<option value=\"1\" selected>1</option>"+
+                            "<option value=\"2\">2</option>"+
+                            "<option value=\"3\">3</option>"+
+                            "<option value=\"4\">4</option>"+
+                            "<option value=\"5\">5</option>"
+                        ;
+                }
+                html +=    
                                 "</select>"+
                             "</div>"+
                         "</div>"+
@@ -250,20 +301,21 @@ function listarCarrinho(){
                                 "<button class=\"btn btn-secondary\"  onclick=\"deletarItemCarrinho("+data[c]['produto_codigo']+")\" ><i class=\"fas fa-trash\" style=\"font-size:20px; color:black;\"></i></button>"+
                             "</div>"+
                         "</div>"
-                );
+                ;
                 
                 if(c<(data.length-1)){
-                    $("#listarCarrinho").append("</div><hr>");
+                    html += "</div><hr>";
                 }   
             }
-            $("#listarCarrinho").append(
+            html +=
                 "</div>"+
                 "<div class=\"card-footer text-right bg-transparent\">"+
                     "<p>SUB TOTAL: R$ "+total+" </p>"+
-                    "<button class=\"btn btn-primary h-25\">Finalizar Compra</button>"+
+                    "<button class=\"btn btn-primary h-25\" id=\"btnPagar\" onclick=\"pedidoFinalizar();\">Finalizar Compra</button>"+
                 "</div>"+
             "</div>"
-            );
+            ;
+            $("#listarCarrinho").append(html);
         }else{
             $("#listarCarrinho").remove();
             $("#itensCarrinhoLista").append(
@@ -274,6 +326,28 @@ function listarCarrinho(){
         }
 
 
+    }).fail(function(jqXHR, textStatus, msg) {
+        alert(msg);
+    });
+}
+
+function quantidadeProduto(qntd,produtoCodigo){
+
+    var data = {qntd : qntd.value, produto_codigo : produtoCodigo};
+
+    $.ajax({
+        url: 'carrinho/updateQntd.php',
+        type: 'post',
+        data: data,
+        datatype: 'html',
+        cache: false,
+        beforeSend: function() {}
+    }).done(function(msg) {
+        if (msg == "ok") {
+            listarCarrinho();
+        } else{
+            alert(msg);
+        }
     }).fail(function(jqXHR, textStatus, msg) {
         alert(msg);
     });
@@ -301,7 +375,7 @@ function deletarItemCarrinho(produtoCodigo){
                 alert(msg);
             }
         }).fail(function(jqXHR, textStatus, msg) {
-            cadastroStatus(msg);
+            alert(msg);
         });
     }
 }
@@ -342,7 +416,7 @@ function detalheProduto(produto){
                                     "<h4 class=\"card-title\">"+data['produto_autor']+"</h4>"+
                                 "</div>"+
                                 "<div class=\"col text-right\">"+
-                                    "<button class=\"btn btn-success\" style=\"margin-right: 10px;\">Adicionar ao Carrinho</button>"+
+                                    "<button class=\"btn btn-success\" style=\"margin-right: 10px;\" onclick=\"carrinho("+data['produto_codigo']+")\">Adicionar ao Carrinho</button>"+
                                 "</div>"+
                                 
                             "</div>"+
@@ -354,7 +428,6 @@ function detalheProduto(produto){
                     "</div>"+
                     "<hr>"+
                     "<div class=\"container-fluid\">"+
-                        
                         "<h5 class=\"card-text row\">Editora: "+data['produto_editora']+"</h5>"+
                         "<h5 class=\"card-text row\">Número de Páginas: "+data['produto_paginas']+"</h5>"+
                         "<h5 class=\"card-text row\">Dimensões: "+data['produto_dimensao']+"</h5>"+
@@ -487,8 +560,23 @@ function categorias(param){
     window.location = "?categoria=" + param;
 }
 
+function pedidoFinalizar(){
+    $('#finalizarPedidoModal').modal('show');
+}
 
+function pedido(){
+    $('#finalizarPedidoModal').modal('hide');
+    alert("Pedido realizado com sucesso!  \n\n Acesse a guia pedido em seu usuário para acompanhar o status do pedido");
+}
+
+function meusPedidos(){
+    $("main").load("html/pedido.html");
+}
 var senha = document.getElementById("senha"), confirmar_senha = document.getElementById("confirmar_senha");
+
+function editarCadastro(){
+    $("main").load("html/editarCadastro.html");
+}
 
 function validarSenha(){
   if(senha.value != confirmar_senha.value) {

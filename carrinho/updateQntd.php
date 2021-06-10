@@ -10,14 +10,14 @@
         require_once "../DAO/CarrinhoDAO.php";
 
         $carrinho = new Carrinho();
-        $qntd = 1;
+
         $carrinho->setProdutoCodigo($_POST['produto_codigo']);
         $carrinho->setClienteCodigo($_SESSION['id']);
-        $carrinho->setQntd($qntd);
+        $carrinho->setQntd($_POST['qntd']);
 
         $carrinhoDAO = new CarrinhoDAO();
 
-        if($carrinhoDAO->inserir($carrinho))
+        if($carrinhoDAO->updateQntd($carrinho))
         {
             $retorno .= "ok";
         }
@@ -29,5 +29,4 @@
     }
     
     echo $retorno;
-
 ?>
