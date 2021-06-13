@@ -58,7 +58,7 @@ function session(){
             $("#divideUsuario2").remove();
             $("#sairUsuario").remove();
 
-            $("#itensUsuario").append("<a class=\"dropdown-item\" data-toggle=\"modal\" data-target=\"#loginModal\" href=\"#\" id=\"entrarUsuario\">Entrar</a>");
+            $("#itensUsuario").append("<a class=\"dropdown-item\" data-bs-toggle=\"modal\" data-bs-target=\"#loginModal\" href=\"#\" id=\"entrarUsuario\">Entrar</a>");
         }
     }).fail(function(jqXHR, textStatus, msg) {
         alert(msg);
