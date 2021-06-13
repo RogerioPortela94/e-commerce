@@ -14,7 +14,7 @@
     <!--CSS FONT-AWESOME-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 
-    <!--CSS BOOTSTRAP-->
+    <!--CSS BOOTSTRAP 5-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     
     <!--JS BOOTSTRAP-->
@@ -25,31 +25,48 @@
 </head>
 <body class="container">
     <header>
-        <nav class="navbar navbar-expand navbar-light bg-light">
-            <div class="container-fluid">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-light p-1">
+                <form class="d-flex" action="?" id="frm_pesquisar">
+                    <input class="form-control" type="search" name="pesquisar" id="pesquisar" placeholder="Pesquisar" aria-label="Pesquisar" aria-describedby="btn_pesquisa"> 
+                </form>
+            </div>
+          </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-xxl">
                 <a class="navbar-brand"  href="http://localhost/e-commerce/" >
                     <img src="img/books.svg" width="30" height="30" alt="Logo">
                 </a>
-                <form class="d-flex" action="?" id="frm_pesquisar">
-                    <div class="input-group mb-1">
-                        <input class="form-control" type="search" name="pesquisar" id="pesquisar" placeholder="Pesquisar" aria-label="Pesquisar" aria-describedby="btn_pesquisa"> 
-                        <button class="btn btn-outline-success" type="submit" id="btn_pesquisa">
-                            <img src="img/pesquisar.svg" width="20" height="20" alt="Pesquisar">
-                        </button>
-                    </div>  
-                </form>
-                <ul class="nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle text-black-50" href="#" id="usuarioDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="img/user.svg" width="30" height="30"  alt="Usuário">
+                <div class="collapse navbar-collapse justify-content-center">
+                    <form class="d-flex " action="?" id="frm_pesquisar">
+                        <div class="input-group mb-1">
+                            <input class="form-control" type="search" name="pesquisar" id="pesquisar" placeholder="Pesquisar" aria-label="Pesquisar" aria-describedby="btn_pesquisa"> 
+                            <button class="btn btn-outline-success" type="submit" id="btn_pesquisa">
+                                <img src="img/pesquisar.svg" width="20" height="20" alt="Pesquisar">
+                            </button>
+                        </div>  
+                    </form>
+                </div>
+                
+                <ul class="nav navbar-nav nav-fill d-flex flex-row">
+                    <li class="nav-item navbar-toggler" style="margin-right: 15px;">
+                        <a class="nav-link" role="button" data-bs-toggle="collapse" href="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <img src="img/pesquisar.svg" width="25" height="25" alt="Pesquisar">
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="usuarioDropdown" id="itensUsuario">
+                    </li>
+                    <li class="nav-item" style="margin-right: 10px;">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle text-black-50" href="#" id="usuarioDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <img src="img/user.svg" width="30" height="30"  alt="Usuário">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioDropdown" id="itensUsuario" style="position: absolute;">
+                            </div>
                         </div>
                     </li>
                     <li class="nav-item">
                         <a  class="nav-link" href="html/cart.html" id="carregar">
                             <i class="fa fa-2x fa-shopping-cart" style="color: black;">
-                                <span class="badge bg-success" id="numCarrinho" ></span>
+                                <span class="badge bg-success small" id="numCarrinho" ></span>
                             </i>
                         </a>
                     </li>
